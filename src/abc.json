@@ -1,0 +1,172 @@
+{
+  "message": {
+    "yaticker": {
+      "enum": {
+        "QuoteType": {
+          "NONE": 0,
+          "ALTSYMBOL": 5,
+          "HEARTBEAT": 7,
+          "EQUITY": 8,
+          "INDEX": 9,
+          "MUTUALFUND": 11,
+          "MONEYMARKET": 12,
+          "OPTION": 13,
+          "CURRENCY": 14,
+          "WARRANT": 15,
+          "BOND": 17,
+          "FUTURE": 18,
+          "ETF": 20,
+          "COMMODITY": 23,
+          "ECNQUOTE": 28,
+          "CRYPTOCURRENCY": 41,
+          "INDICATOR": 42,
+          "INDUSTRY": 1000
+        },
+        "OptionType": {
+          "CALL": 0,
+          "PUT": 1
+        },
+        "MarketHoursType": {
+          "PRE_MARKET": 0,
+          "REGULAR_MARKET": 1,
+          "POST_MARKET": 2,
+          "EXTENDED_HOURS_MARKET": 3
+        }
+      },
+      "field": {
+        "id": {
+          "number": 1,
+          "type": "string"
+        },
+        "price": {
+          "number": 2,
+          "type": "float"
+        },
+        "time": {
+          "number": 3,
+          "type": "sint64"
+        },
+        "currency": {
+          "number": 4,
+          "type": "string"
+        },
+        "exchange": {
+          "number": 5,
+          "type": "string"
+        },
+        "quoteType": {
+          "number": 6,
+          "type": "QuoteType"
+        },
+        "marketHours": {
+          "number": 7,
+          "type": "MarketHoursType"
+        },
+        "changePercent": {
+          "number": 8,
+          "type": "float"
+        },
+        "dayVolume": {
+          "number": 9,
+          "type": "sint64"
+        },
+        "dayHigh": {
+          "number": 10,
+          "type": "float"
+        },
+        "dayLow": {
+          "number": 11,
+          "type": "float"
+        },
+        "change": {
+          "number": 12,
+          "type": "float"
+        },
+        "shortName": {
+          "number": 13,
+          "type": "string"
+        },
+        "expireDate": {
+          "number": 14,
+          "type": "sint64"
+        },
+        "openPrice": {
+          "number": 15,
+          "type": "float"
+        },
+        "previousClose": {
+          "number": 16,
+          "type": "float"
+        },
+        "strikePrice": {
+          "number": 17,
+          "type": "float"
+        },
+        "underlyingSymbol": {
+          "number": 18,
+          "type": "string"
+        },
+        "openInterest": {
+          "number": 19,
+          "type": "sint64"
+        },
+        "optionsType": {
+          "number": 20,
+          "type": "OptionType"
+        },
+        "miniOption": {
+          "number": 21,
+          "type": "sint64"
+        },
+        "lastSize": {
+          "number": 22,
+          "type": "sint64"
+        },
+        "bid": {
+          "number": 23,
+          "type": "float"
+        },
+        "bidSize": {
+          "number": 24,
+          "type": "sint64"
+        },
+        "ask": {
+          "number": 25,
+          "type": "float"
+        },
+        "askSize": {
+          "number": 26,
+          "type": "sint64"
+        },
+        "priceHint": {
+          "number": 27,
+          "type": "sint64"
+        },
+        "vol_24hr": {
+          "number": 28,
+          "type": "sint64"
+        },
+        "volAllCurrencies": {
+          "number": 29,
+          "type": "sint64"
+        },
+        "fromcurrency": {
+          "number": 30,
+          "type": "string"
+        },
+        "lastMarket": {
+          "number": 31,
+          "type": "string"
+        },
+        "circulatingSupply": {
+          "number": 32,
+          "type": "double"
+        },
+        "marketcap": {
+          "number": 33,
+          "type": "double"
+        }
+      }
+    }
+  }
+}

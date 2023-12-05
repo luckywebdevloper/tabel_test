@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import protobuf from "protobufjs";
 import { Buffer } from "buffer";
-import axios from "axios";
 import {
   Table,
   TableHeader,
@@ -11,63 +10,73 @@ import {
   TableCell,
 } from "@nextui-org/react";
 
-axios
-  .get("https://query1.finance.yahoo.com/v8/finance/chart/MAREL.IC", {
-    params: {
-      region: "US",
-      lang: "en-US",
-      includePrePost: false,
-      interval: "1d",
-      range: "5d",
-      corsDomain: "finance.yahoo.com",
-      ".tsrc": "finance",
-    },
-  })
-  .then((res) => {
-    const values = res.data; // Assuming the data you need is directly in res.data
-    console.log(values);
-  })
-  .catch((error) => {
-    console.error("Error fetching data:", error);
-  });
-
 function App() {
-  const [stockdetail, setStockdetail] = useState();
-  const [direction, setDirection] = useState("");
+  const API_ENDPOINT = "https://query1.finance.yahoo.com/v8/finance/chart/";
+
+  const SymbolList = ["SBIN.NS"]; // Add your list of symbols here
+
+  const fetchDataForSymbol = async (symbol) => {
+    try {
+      const response = await fetch(`${API_ENDPOINT}${symbol}`);
+      const data = await response.json();
+      // Process the data as needed
+      console.log(`Data for ${symbol}:`, data);
+    } catch (error) {
+      console.error(`Error fetching data for ${symbol}:`, error);
+    }
+  };
+  // const [stockdetail, setStockdetail] = useState();
+  // const [direction, setDirection] = useState("");
+  // useEffect(() => {
+  //   const ws = new WebSocket("wss://streamer.finance.yahoo.com");
+  //   const root = protobuf.load("../YPricingData.proto", (error, root) => {
+  //     if (error) {
+  //       return console.log(error);
+  //     }
+  //     const Yaticker = root.lookupType("yaticker");
+
+  //     ws.onopen = function open() {
+  //       console.log("connected");
+  //       ws.send(
+  //         JSON.stringify({
+  //           subscribe: ["SBIN.NS"],
+  //         })
+  //       );
+  //     };
+
+  //     ws.onclose = function close() {
+  //       console.log("disconnected");
+  //     };
+
+  //     ws.onmessage = function incoming(message) {
+  //       const next = Yaticker.decode(new Buffer(message.data, "base64"));
+  //       if (stockdetail) {
+  //         const nextdirection =
+  //           stockdetail.price < next ? "up" : stockdetail.price ? "down" : "";
+  //         if (nextdirection) {
+  //           setDirection(nextdirection);
+  //         }
+  //       }
+  //       setStockdetail(next);
+  //     };
+  //   });
+  // }, []);
   useEffect(() => {
-    const ws = new WebSocket("wss://streamer.finance.yahoo.com");
-    const root = protobuf.load("../YPricingData.proto", (error, root) => {
-      if (error) {
-        return console.log(error);
-      }
-      const Yaticker = root.lookupType("yaticker");
+    const fetchData = () => {
+      SymbolList.forEach((symbol) => {
+        fetchDataForSymbol(symbol);
+      });
+    };
 
-      ws.onopen = function open() {
-        console.log("connected");
-        ws.send(
-          JSON.stringify({
-            subscribe: ["SBIN.NS"],
-          })
-        );
-      };
+    // Fetch data initially
+    fetchData();
 
-      ws.onclose = function close() {
-        console.log("disconnected");
-      };
+    // Set up interval to fetch data every 3 seconds
+    const intervalId = setInterval(fetchData, 3000);
 
-      ws.onmessage = function incoming(message) {
-        const next = Yaticker.decode(new Buffer(message.data, "base64"));
-        if (stockdetail) {
-          const nextdirection =
-            stockdetail.price < next ? "up" : stockdetail.price ? "down" : "";
-          if (nextdirection) {
-            setDirection(nextdirection);
-          }
-        }
-        setStockdetail(next);
-      };
-    });
-  }, []);
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array means this effect runs once when the component mounts
 
   return (
     <div className="App">

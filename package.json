@@ -3,15 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@nextui-org/react": "^2.2.9",
+    "@react-native-community/protobufjs": "^6.7.3-custom",
+    "@table-library/react-table-library": "^4.1.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.2",
+    "buffer": "^6.0.3",
+    "framer-motion": "^10.16.12",
+    "isomorphic-ws": "^5.0.0",
+    "lightweight-charts": "^4.1.1",
+    "protobufjs": "^7.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "stocksocket": "^2.1.2",
+    "web-vitals": "^2.1.4",
+    "yahoo-finance2": "^2.8.1",
+    "yahoo-stock-api": "^2.2.1"
   },
   "scripts": {
+    "protobuf:compile": "protoc --js_out=import_style=commonjs,binary:\"node_modules/.bin\" YPricingData.proto",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
   }
 }
